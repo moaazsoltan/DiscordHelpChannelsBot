@@ -1,2 +1,4 @@
 stuff.txt
 setup.json
+__pycache__
+.idea
