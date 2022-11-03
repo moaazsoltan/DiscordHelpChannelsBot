@@ -11,7 +11,7 @@ It does take a fair bit of setting up and some basic faimliarity with how python
 made.
 
 ** I wil expand on this in the future as this is still work in progress **
-
+```
 JSON setup Layout
 {
     "TOKEN" : "",
@@ -20,3 +20,4 @@ JSON setup Layout
     "Occupied Help Channels Category Name" : "Occupied Help Channels",
     "Question Asker Role" : " "
 }
+```
