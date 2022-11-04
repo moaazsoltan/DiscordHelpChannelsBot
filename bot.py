@@ -2,7 +2,7 @@ import discord
 import responses
 from global_variables import help_channels_dict, TOKEN, available_help_channels_category_name, \
     occupied_help_channels_category_name, message_channel_available
-from helpers import send_message_to_newly_claimed_channel, send_message_to_user_for_newly_claimed_channel
+from helpers import send_message_to_newly_claimed_channel, send_message_to_user_for_newly_claimed_channel, send_message_to_just_closed_channel
 
 
 # Send messages
@@ -33,6 +33,7 @@ def run_discord_bot():
 
         if channel in help_channels_dict:
             if not help_channels_dict[channel].occupied:
+                # moving channel so that its now occupied
                 category_channel = discord.utils.get(message.guild.channels, name=occupied_help_channels_category_name)
                 await message.channel.edit(category=category_channel)
 
@@ -50,6 +51,7 @@ def run_discord_bot():
                 # Pinning user question
                 await message.pin()
 
+                # TODO: Assign Role to person asking question
 
             # only allow the person who asked the channel to close it
             elif user_message == "!close" and help_channels_dict[channel].question_asker == username:
@@ -57,18 +59,17 @@ def run_discord_bot():
                 help_channels_dict[channel].question_asker = None
                 help_channels_dict[channel].occupied = False
 
+                # moving channel back to available category
                 category_channel = discord.utils.get(message.guild.channels, name=available_help_channels_category_name)
                 await message.channel.edit(category=category_channel)
-                await message.channel.send(f"This channel is now available again for use")
-                embedVar = discord.Embed(title="This Channel is now available once again!", description=message_channel_available,
-                                         color=0x00ff00)
-                # embedVar.add_field(name="Field1", value="hi", inline=False)
-                await message.channel.send(embed=embedVar)
+
+                # sending relevant message in channel
+                await send_message_to_just_closed_channel(message, message_channel_available)
 
                 # unpin the message after the help channel has been freed
                 await help_channels_dict[channel].question_pin.unpin()
 
-
+                # TODO: remove role from person asking question
 
 
     client.run(TOKEN)
