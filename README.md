@@ -5,12 +5,13 @@ This version of the bot does the absolute minimum to ensure smooth service.
 
 
 
-## How to run the bot
+## Setting up the Bot
 So far the bot hasn't been fully built to be set up through the text channels on discord.
-It does take a fair bit of setting up and some basic faimliarity with how python discords are
-made.
+It does take a fair bit of setting up and some basic faimliarity with how discord bots are made using python.
 
-** I wil expand on this in the future as this is still work in progress **
+Once you have set it up on your own server it is pretty straight forward. You only need to modifyt he JSON file.
+
+
 ```
 JSON setup Layout
 {
@@ -21,3 +22,6 @@ JSON setup Layout
     "Question Asker Role" : " "
 }
 ```
+
+## Reseting the bot
+If the server drops all channels must be reset manually.
